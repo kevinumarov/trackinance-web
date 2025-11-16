@@ -1,0 +1,28 @@
+.b-overlay-wrap {
+  z-index: 1040 !important;
+}
+
+.btn.active,
+.dropdown-toggle,
+.btn.show {
+  color: var(--bs-btn-active-color);
+  background-color: var(--bs-btn-active-bg);
+  border: none;
+}
+
+.toast-header {
+  justify-content: space-between;
+}
+
+.b-overlay-wrap {
+  opacity: 0.7;
+}
+
+@include media-breakpoint-down(md) {
+  .email-offcanvas {
+    --#{$prefix}offcanvas-width: 100%;
+  }
+}
+.email-offcanvas {
+  --#{$prefix}offcanvas-width: 780px;
+}
