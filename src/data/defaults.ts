@@ -8,6 +8,7 @@ export const ACCOUNTS = [
   'KB',
   'Woori',
   'NH',
+  'Cash',
 ]
 
 export const DEFAULT_SUBCATEGORIES: Record<CategoryType, string[]> = {

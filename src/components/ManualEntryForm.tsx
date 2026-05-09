@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import { Upload, Calendar, ChevronDown, Plus, Check, X } from 'lucide-react'
+import { Upload, ChevronDown, Plus, Check, X } from 'lucide-react'
+import { DatePicker } from '@/components/ui/DatePicker'
+import { AccountPicker } from '@/components/ui/AccountPicker'
 import { getCurrentDateString } from '@/lib/format'
 import type { Transaction, CategoryType, TransactionKind } from '@/types'
 
@@ -230,32 +232,22 @@ export function ManualEntryForm({
               <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
                 Date
               </label>
-              <div className="relative flex items-center border border-gray-200 rounded-lg px-2.5 py-2">
-                <Calendar size={12} className="text-gray-400 mr-1.5 shrink-0" />
-                <input
-                  type="date"
-                  value={expense.date}
-                  onChange={(e) => setExp('date', e.target.value)}
-                  className="flex-1 outline-none text-xs text-gray-900 bg-transparent cursor-pointer"
-                />
-              </div>
+              <DatePicker
+                value={expense.date}
+                onChange={(v) => setExp('date', v)}
+                size="sm"
+                className="w-full"
+              />
             </div>
             <div>
               <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
                 Account
               </label>
-              <div className="relative">
-                <select
-                  value={expense.account}
-                  onChange={(e) => setExp('account', e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg px-3 pr-7 py-2 text-xs text-gray-900 outline-none appearance-none bg-white cursor-pointer"
-                >
-                  {accounts.map((a) => (
-                    <option key={a}>{a}</option>
-                  ))}
-                </select>
-                <ChevronDown size={12} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-              </div>
+              <AccountPicker
+                value={expense.account}
+                onChange={(v) => setExp('account', v)}
+                accounts={accounts}
+              />
             </div>
           </div>
 
@@ -395,32 +387,22 @@ export function ManualEntryForm({
               <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
                 Date
               </label>
-              <div className="relative flex items-center border border-gray-200 rounded-lg px-2.5 py-2">
-                <Calendar size={12} className="text-gray-400 mr-1.5 shrink-0" />
-                <input
-                  type="date"
-                  value={income.date}
-                  onChange={(e) => setInc('date', e.target.value)}
-                  className="flex-1 outline-none text-xs text-gray-900 bg-transparent cursor-pointer"
-                />
-              </div>
+              <DatePicker
+                value={income.date}
+                onChange={(v) => setInc('date', v)}
+                size="sm"
+                className="w-full"
+              />
             </div>
             <div>
               <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
                 Account
               </label>
-              <div className="relative">
-                <select
-                  value={income.account}
-                  onChange={(e) => setInc('account', e.target.value)}
-                  className="w-full border border-gray-200 rounded-lg px-3 pr-7 py-2 text-xs text-gray-900 outline-none appearance-none bg-white cursor-pointer"
-                >
-                  {accounts.map((a) => (
-                    <option key={a}>{a}</option>
-                  ))}
-                </select>
-                <ChevronDown size={12} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
-              </div>
+              <AccountPicker
+                value={income.account}
+                onChange={(v) => setInc('account', v)}
+                accounts={accounts}
+              />
             </div>
           </div>
 

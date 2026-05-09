@@ -53,3 +53,12 @@ export function formatMonthYear(dateStr: string): string {
   const [year, month] = dateStr.split('-').map(Number)
   return `${MONTHS[month - 1]} ${year}`
 }
+
+export function filterByPeriod<T extends { date: string }>(
+  items: T[],
+  selectedDate: string,
+  mode: 'daily' | 'monthly',
+): T[] {
+  const prefix = mode === 'daily' ? selectedDate.slice(0, 10) : selectedDate.slice(0, 7)
+  return items.filter((item) => item.date.startsWith(prefix))
+}
