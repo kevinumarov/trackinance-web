@@ -1,7 +1,6 @@
 import {
   AreaChart,
   Area,
-  LineChart,
   Line,
   XAxis,
   YAxis,
@@ -11,8 +10,8 @@ import {
   PieChart,
   Pie,
   Cell,
-  Legend,
 } from 'recharts'
+import type { ValueType, NameType } from 'recharts/types/component/DefaultTooltipContent'
 import { formatKRW } from '@/lib/format'
 import { BarChartIcon } from '@/icons/AppIcons'
 import type { Transaction, CategoryType } from '@/types'
@@ -93,8 +92,10 @@ function yAxisFormatter(v: number) {
   return formatK(v)
 }
 
-function tooltipFormatter(value: number, name: string) {
-  return [formatK(value), name.charAt(0).toUpperCase() + name.slice(1)]
+function tooltipFormatter(value: ValueType | undefined, name: NameType | undefined) {
+  const v = typeof value === 'number' ? formatK(value) : String(value ?? '')
+  const n = String(name ?? '')
+  return [v, n.charAt(0).toUpperCase() + n.slice(1)]
 }
 
 interface EmptyChartProps { label: string }
