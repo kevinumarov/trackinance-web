@@ -48,7 +48,12 @@ function buildExportData(transactions: Transaction[], viewMode: ViewMode, select
         amount: tx.amount,
         account: tx.account,
         ...(tx.kind === 'expense'
-          ? { category: tx.category, subcategory: tx.subcategory }
+          ? {
+              category: tx.category,
+              subcategory: tx.subcategory,
+              ...(tx.vendor ? { vendor: tx.vendor } : {}),
+              ...(tx.location ? { location: tx.location } : {}),
+            }
           : { source: tx.source }),
         reason: tx.reason,
         type: tx.type,
