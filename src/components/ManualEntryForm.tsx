@@ -26,6 +26,8 @@ interface ExpenseForm {
   account: string
   category: CategoryType
   subcategory: string
+  vendor: string
+  location: string
   reason: string
   isOneTime: boolean
 }
@@ -102,6 +104,8 @@ export function ManualEntryForm({
     account: accounts[0] ?? '',
     category: 'needs',
     subcategory: subcategories.needs[0] ?? '',
+    vendor: '',
+    location: '',
     reason: '',
     isOneTime: true,
   })
@@ -146,10 +150,14 @@ export function ManualEntryForm({
       account: expense.account,
       category: expense.category,
       subcategory: expense.subcategory,
+      vendor: expense.vendor.trim() || undefined,
+      location: expense.location.trim() || undefined,
       reason: expense.reason.trim() || expense.subcategory,
       type: expense.isOneTime ? 'one_time' : 'recurring',
     })
     setExp('amount', '')
+    setExp('vendor', '')
+    setExp('location', '')
     setExp('reason', '')
   }
 
@@ -317,6 +325,34 @@ export function ManualEntryForm({
                 <ChevronDown size={12} className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
               </div>
             )}
+          </div>
+
+          {/* Vendor + Location */}
+          <div className="grid grid-cols-2 gap-3 mb-4">
+            <div>
+              <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
+                Vendor Name
+              </label>
+              <input
+                type="text"
+                value={expense.vendor}
+                onChange={(e) => setExp('vendor', e.target.value)}
+                placeholder="e.g., E-mart"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 outline-none focus:border-gray-400 transition-colors placeholder:text-gray-300"
+              />
+            </div>
+            <div>
+              <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">
+                Location
+              </label>
+              <input
+                type="text"
+                value={expense.location}
+                onChange={(e) => setExp('location', e.target.value)}
+                placeholder="e.g., Seoul, Mapo"
+                className="w-full border border-gray-200 rounded-lg px-3 py-2 text-xs text-gray-900 outline-none focus:border-gray-400 transition-colors placeholder:text-gray-300"
+              />
+            </div>
           </div>
 
           {/* Reason */}

@@ -13,6 +13,8 @@ export interface Transaction {
   category?: CategoryType
   subcategory?: string
   source?: string
+  vendor?: string
+  location?: string
   reason: string
   type: TransactionType
 }
